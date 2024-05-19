@@ -2,10 +2,11 @@ package com.bank.account.BankApplication.Service;
 
 import com.bank.account.BankApplication.BankAccount.BankAccount;
 import com.bank.account.BankApplication.Exception.MobileNumberInvalidException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -25,5 +26,13 @@ public class BankAccountService {
        }catch(MobileNumberInvalidException e){
            throw new RuntimeException(e.getMessage());
        }
+    }
+
+    public List<BankAccount> allbankAccounts() {
+        List<BankAccount> l = new ArrayList<>();
+        for(int j =1;j<=i;j++){
+            l.add(a.get(j));
+        }
+        return l;
     }
 }

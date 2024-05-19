@@ -6,10 +6,7 @@ import com.bank.account.BankApplication.common.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,14 +20,23 @@ public class BankAccountController {
     public ResponseEntity<ApiResponse> addAccount(@RequestBody BankAccount bankAccount){
         try{
             BankAccount createdAccount = bankAccountService.addAccount(bankAccount);
-            return ResponseEntity.ok(new ApiResponse(true, "Account created successfully"));
+            return ResponseEntity.ok(new ApiResponse(true, "Account created successfully",createdAccount));
         }catch(RuntimeException ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
         }
    }
 
    @GetMapping("/accounts")
-    public List<BankAccount> allbankAccounts(){
-       return bankAccountService.allbankAccounts();
+    public List<BankAccount> allBankAccounts(){
+       return bankAccountService.allBankAccounts();
+   }
+   @GetMapping("/account/{id}")
+    public ResponseEntity<ApiResponse> getBankAccount(@PathVariable int id) {
+       try {
+           BankAccount getAccount = bankAccountService.getBankAccount(id);
+           return ResponseEntity.ok(new ApiResponse(true, "Valid ID",getAccount));
+       } catch (RuntimeException ex) {
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
+       }
    }
 }

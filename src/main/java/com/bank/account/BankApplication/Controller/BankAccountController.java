@@ -1,5 +1,6 @@
 package com.bank.account.BankApplication.Controller;
 
+import com.bank.account.BankApplication.BankAccount.Amount;
 import com.bank.account.BankApplication.BankAccount.BankAccount;
 import com.bank.account.BankApplication.Service.BankAccountService;
 import com.bank.account.BankApplication.common.ApiResponse;
@@ -36,6 +37,16 @@ public class BankAccountController {
            BankAccount getAccount = bankAccountService.getBankAccount(id);
            return ResponseEntity.ok(new ApiResponse(true, "Valid ID",getAccount));
        } catch (RuntimeException ex) {
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
+       }
+   }
+
+   @PutMapping("/deposit/{id}")
+    public ResponseEntity<ApiResponse> depositAmount(@PathVariable int id,@RequestBody Amount amount){
+       try {
+           BankAccount depositAccount = bankAccountService.depositAmount(id,amount);
+            return ResponseEntity.ok(new ApiResponse(true, "Amount Deposit Successfully",depositAccount));
+       }catch(RuntimeException ex){
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
        }
    }

@@ -1,11 +1,10 @@
 package com.bank.account.BankApplication.Service;
 
+import com.bank.account.BankApplication.BankAccount.Amount;
 import com.bank.account.BankApplication.BankAccount.BankAccount;
 import com.bank.account.BankApplication.Exception.InvalidIdException;
 import com.bank.account.BankApplication.Exception.MobileNumberInvalidException;
-import com.bank.account.BankApplication.common.ApiResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.bank.account.BankApplication.Exception.NegativeAmountException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.http.ResponseEntity.*;
 
 @Service
 public class BankAccountService {
@@ -54,6 +52,33 @@ public class BankAccountService {
             throw new InvalidIdException("Invalid Id");
         }catch(InvalidIdException e){
            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public BankAccount depositAmount(int id, Amount amount) {
+        BankAccount bankAccount;
+        for(int j=1;j<=i && a.get(j)!=null;j++){
+            if(id == j){
+                bankAccount = a.get(j);
+                bankAccount.setId(j);
+                if(amount.getAmount()>0){
+                    bankAccount.setBalance(bankAccount.getBalance()+amount.getAmount());
+                }
+                else{
+                    try{
+                        throw new NegativeAmountException("Invalid Amount");
+                    }catch(NegativeAmountException e){
+                        throw new RuntimeException(e.getMessage());
+                    }
+                }
+                a.put(j,bankAccount);
+                return a.get(j);
+            }
+        }
+        try{
+            throw new InvalidIdException("Invalid Id");
+        }catch(InvalidIdException e){
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

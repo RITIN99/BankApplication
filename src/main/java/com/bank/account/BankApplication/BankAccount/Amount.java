@@ -7,8 +7,4 @@ public class Amount {
         return amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
 }

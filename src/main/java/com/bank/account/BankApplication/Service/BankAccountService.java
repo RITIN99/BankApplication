@@ -13,10 +13,10 @@ import java.util.Map;
 
 @Service
 public class BankAccountService {
-    private static Map<Integer,BankAccount> a = new HashMap<>();
-    private static int i =1;
+    private Map<Integer,BankAccount> a = new HashMap<>();
+    private int i =1;
 
-    public static BankAccount addAccount(BankAccount bankAccount) {
+    public BankAccount addAccount(BankAccount bankAccount) {
        try{
            bankAccount.setId(i);
            if (bankAccount.getMobile_no().length() > 10 ) {

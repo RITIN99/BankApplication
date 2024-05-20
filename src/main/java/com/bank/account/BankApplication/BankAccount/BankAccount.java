@@ -47,12 +47,5 @@ public class BankAccount {
         this.balance = balance;
     }
 
-    public BankAccount(int id, String name, String mobile_no, int age, int balance) {
-        this.id = id;
-        this.name = name;
-        this.mobile_no = mobile_no;
-        this.age = age;
-        this.balance = balance;
-    }
 
 }

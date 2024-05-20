@@ -50,4 +50,14 @@ public class BankAccountController {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
        }
    }
+
+    @PutMapping("/withdraw/{id}")
+    public ResponseEntity<ApiResponse> withdrawAmount(@PathVariable int id,@RequestBody Amount amount){
+        try {
+            BankAccount withdrawAccount = bankAccountService.withdrawAmount(id,amount);
+            return ResponseEntity.ok(new ApiResponse(true, "Amount Withdraw Successfully",withdrawAccount));
+        }catch(RuntimeException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
+        }
+    }
 }

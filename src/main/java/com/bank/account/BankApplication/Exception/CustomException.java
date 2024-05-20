@@ -1,8 +1,8 @@
 package com.bank.account.BankApplication.Exception;
 
-public class InvalidIdException extends RuntimeException {
+public class CustomException extends RuntimeException{
     private String msg;
-    public InvalidIdException(String msg){
+    public CustomException(String msg){
         super(msg);
     }
 }

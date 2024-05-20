@@ -1,7 +1,7 @@
 package com.bank.account.BankApplication.common;
 
 import com.bank.account.BankApplication.BankAccount.BankAccount;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 public class ApiResponse {
     private final boolean success;

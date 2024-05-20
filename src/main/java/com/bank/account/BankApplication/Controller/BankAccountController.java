@@ -60,4 +60,14 @@ public class BankAccountController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResponse> deleteAccount(@PathVariable int id){
+       try{
+           BankAccount deleteAccount = bankAccountService.deleteAccount(id);
+           return ResponseEntity.ok(new ApiResponse(true, "Account Deleted Successfully",deleteAccount));
+       }catch(RuntimeException ex){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, ex.getMessage()));
+       }
+    }
 }

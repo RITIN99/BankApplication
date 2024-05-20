@@ -111,4 +111,18 @@ public class BankAccountService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    public BankAccount deleteAccount(int id) {
+
+        for(int j=1;j<=i && a.get(j)!=null;j++){
+            if(id == j){
+               return a.remove(j);
+            }
+        }
+        try{
+            throw new CustomException("Invalid Id");
+        }catch(CustomException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
